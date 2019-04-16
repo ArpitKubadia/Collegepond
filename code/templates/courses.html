@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Collegepond</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#submit").click(function(){
+				var selected=[];
+				$.each($("input[name='course_name']:checked"), function(){            
+                selected.push($(this).val());
+            	});
+
+			});
+
+
+			$('#select-all').click(function(event) {   
+			    if(this.checked) {
+			        // Iterate each checkbox
+			        $(':checkbox').each(function() {
+			            this.checked = true;                        
+			        });
+			    } else {
+			        $(':checkbox').each(function() {
+			            this.checked = false;                       
+			        });
+			    }
+			});
+		});
+	</script>
+</head>
+<body>
+<div class='container-fluid'>
+	<div class="row">
+		<div class='col-md-8'>
+			<form method="GET" action="{{url_for('parse_data')}}">
+				<label>					
+					<input type="checkbox" id="select-all" >Select All					
+				</label>
+				<br>
+				{% for course in courses%}
+				<label>					
+					<input type="checkbox" id="course_box" name="course_box" value="{{course}}">{{course}}					
+				</label>
+				<br>
+				{% endfor %}
+				<button class="btn btn-primary" id="submit" type="submit">Submit</button>
+
+			</form>
+		</div>
+
+	</div>
+	
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>	
+
+</body>
+</html>
